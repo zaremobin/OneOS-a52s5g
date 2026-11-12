@@ -48,6 +48,8 @@ enum class ApkSeries(val id: String, val label: String, val profileIds: List<Str
             Profiles.ID_S_8550_JP,
             // 0.4.95: the Galaxy M35 5G (One UI 9) and the Galaxy A15 5G with MediaTek (One UI 8.5).
             Profiles.ID_M35, Profiles.ID_A15_5G,
+            // 0.4.96-fork: the Galaxy A52s 5G (UN1CA host, One UI 8.0 base).
+            Profiles.ID_A52SXQ,
         ),
     ),
     ;

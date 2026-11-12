@@ -1,0 +1,62 @@
+# Build the A52s fork's APKs with GitHub Actions (no local Android SDK needed).
+# OneOS 0.4.96 fork (zaremobin/OneOS-a52s5g): adds the Galaxy A52s 5G (a52sxq)
+# profile. Two artifacts per run: the full edition (switcher) and OneOS Probe.
+#
+# The full edition builds with -Poneos.series=s25: its APK carries only the s25
+# series' set lists (the oxygen16 set included), the files themselves download
+# on the phone by SHA-256 from the pinned gh:/Drive/SourceForge sources
+# (app-android/packages/remote.txt + sizes.txt), so no out/ overlay dirs are
+# needed here. The guest manager APK (:guest) is built first and staged where
+# the app's integrity pins expect it.
+
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build the guest manager (debug) and stage it
+        working-directory: app-android
+        run: |
+          ./gradlew --max-workers=3 :guest:assembleDebug
+          cp guest/build/outputs/apk/debug/guest-debug.apk ../switcher/assets/guest_manager.apk
+
+      - name: Build OneOS Probe (debug)
+        working-directory: app-android
+        run: ./gradlew --max-workers=3 assembleProbeDebug
+
+      - name: Build OneOS full, s25 series (debug)
+        working-directory: app-android
+        run: ./gradlew --max-workers=3 -Poneos.series=s25 assembleFullDebug
+
+      - name: Core model tests
+        working-directory: app-android
+        run: ./gradlew --max-workers=3 :core:model:test
+
+      - name: Collect artifacts
+        run: |
+          mkdir -p out
+          cp app-android/app/build/outputs/apk/full/debug/*.apk out/ || true
+          cp app-android/app/build/outputs/apk/probe/debug/*.apk out/ || true
+          ls -l out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oneos-a52sxq-apks
+          path: out/*.apk

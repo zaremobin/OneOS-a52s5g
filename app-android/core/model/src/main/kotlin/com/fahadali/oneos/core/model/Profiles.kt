@@ -96,6 +96,7 @@ object Profiles {
     const val ID_FLIP7 = "flip7"
     const val ID_A56 = "a56"
     const val ID_A57 = "a57"
+    const val ID_A52SXQ = "a52sxq"
     const val ID_FLIP5 = "flip5"
     const val ID_FOLD6 = "f6"
     const val ID_A07 = "a07"
@@ -254,6 +255,9 @@ object Profiles {
 
     /** The SM8750 phones (S25 Ultra, S25, S25+, Z Fold7): vendor API 202404 and kernel 6.6. */
     private val OLDER_VENDOR = olderVendor("202404", "6.6")
+
+    /** The A52s 5G (vendor API 30, kernel 5.4) — the oldest vendor OneOS has been asked to run on. */
+    private val OLDER_VENDOR_5_4 = olderVendor("30", "5.4")
 
     /**
      * The SM8550 phones (Galaxy S23, S23+): vendor API 33 (Android 13) and
@@ -616,6 +620,27 @@ object Profiles {
         form = FormFactor.BAR,
         choices = listOf(X9U_IN_TESTED, PIXEL9_CHOICE, INFINITYX_CHOICE, HYPEROS_CHOICE),
         notes = listOf(EXYNOS),
+    )
+
+    /**
+     * Galaxy A52s 5G, from 0.4.96-fork: findings of 2026-11-12 (SM-A528B, a52sxq,
+     * Snapdragon SM7325 "lahaina", UN1CA 3.2.1 host — a One UI 8.0 system build on
+     * the S22 Snapdragon base, ro.build.version.oneui 80000, Android 16 SDK 36,
+     * build BP2A.250605.031.A3, vendor API 30 and kernel 5.4.302-qgki, one
+     * 1080 x 2400 panel, 6.5 in, HIDL composer, Cortex-A55/A78 with no SVE, SVE2
+     * or SME, KernelSU/Magisk, bootloader A528BXXSBGYI3, vendor SM-A528B, 57.3 GB
+     * free). The S22 Snapdragon's generation ([S_8450]'s One UI, M55s's kernel), so
+     * its choice: OxygenOS 16 only, untested, with an older-vendor note.
+     */
+    val A52SXQ = PhoneProfile(
+        id = ID_A52SXQ,
+        label = "Galaxy A52s 5G",
+        modelPrefix = "SM-A528",
+        codename = "a52sxq",
+        socModel = "SM7325",
+        form = FormFactor.BAR,
+        choices = listOf(OXYGEN16_CHOICE),
+        notes = listOf(OLDER_VENDOR_5_4),
     )
 
     /**
@@ -1287,6 +1312,7 @@ object Profiles {
         S_ULTRA_8550, FLIP6, S_9945, S_EDGE_8750, S_FE_9945, A26, A17, A16, S_9965, A16_4G, A16_S166, A35, A54, A27, A17_5G, FLIP7_FE,
         A06, A07_5G, A15, A24, A25, A33, A34, A53, E55, S_FE_9925, S_FE_8450, S_PLUS_9925, S_ULTRA_9925, S_ULTRA_8450,
         A55, S25_FE, S_8450, M55S, S_ULTRA_8450_JP, S_PLUS_9945, S_ULTRA_8550_JP, S_9925, A16_MTK, S_8550_JP, M35, A15_5G,
+        A52SXQ,
     )
 
     /** `ro.build.version.oneui` values seen on profiled phones (all One UI 9.0). */
