@@ -40,20 +40,34 @@ jobs:
 
       - name: Build the guest manager (debug) and stage it
         working-directory: app-android
+        env:
+          # tribalfs/oneui-design on GitHub Packages (settings.gradle.kts):
+          # public package, but maven.pkg.github.com always wants a token.
+          GH_PACKAGES_USER: ${{ secrets.GH_PACKAGES_USER }}
+          GH_PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
           ./gradlew --max-workers=3 :guest:assembleDebug
           cp guest/build/outputs/apk/debug/guest-debug.apk ../switcher/assets/guest_manager.apk
 
       - name: Build OneOS Probe (debug)
         working-directory: app-android
+        env:
+          GH_PACKAGES_USER: ${{ secrets.GH_PACKAGES_USER }}
+          GH_PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: ./gradlew --max-workers=3 assembleProbeDebug
 
       - name: Build OneOS full, s25 series (debug)
         working-directory: app-android
+        env:
+          GH_PACKAGES_USER: ${{ secrets.GH_PACKAGES_USER }}
+          GH_PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: ./gradlew --max-workers=3 -Poneos.series=s25 assembleFullDebug
 
       - name: Core model tests
         working-directory: app-android
+        env:
+          GH_PACKAGES_USER: ${{ secrets.GH_PACKAGES_USER }}
+          GH_PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: ./gradlew --max-workers=3 :core:model:test
 
       - name: Collect artifacts
