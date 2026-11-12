@@ -292,6 +292,7 @@ Downloads: each system's own link below (the SourceForge mirror, resumable); all
   - Galaxy S23 (au) (SCG19, SM8550), not tested yet
   - Galaxy M35 5G (SM-M356, s5e8835), not tested yet
   - Galaxy A15 5G (SM-A156, MT6835), not tested yet
+  - Galaxy A52s 5G (SM-A528, SM7325), not tested yet
 
 ## OriginOS 7, vivo PD2609MA build
 

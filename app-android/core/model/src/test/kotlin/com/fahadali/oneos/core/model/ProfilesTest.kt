@@ -289,7 +289,7 @@ class ProfilesTest {
                 Profiles.S_FE_9925, Profiles.S_FE_8450, Profiles.S_PLUS_9925, Profiles.S_ULTRA_9925, Profiles.S_ULTRA_8450,
                 Profiles.A55, Profiles.S25_FE, Profiles.S_8450, Profiles.M55S, Profiles.S_ULTRA_8450_JP, Profiles.S_PLUS_9945,
                 Profiles.S_ULTRA_8550_JP, Profiles.S_9925, Profiles.A16_MTK, Profiles.S_8550_JP,
-                Profiles.M35, Profiles.A15_5G,
+                Profiles.M35, Profiles.A15_5G, Profiles.A52SXQ,
             ),
             Profiles.BUILT_IN,
         )

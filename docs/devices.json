@@ -2268,6 +2268,24 @@
           "tested": false
         }
       ]
+    },
+    {
+      "id": "a52sxq",
+      "label": "Galaxy A52s 5G",
+      "model": "SM-A528",
+      "codename": "a52sxq",
+      "chip": "SM7325",
+      "form": "bar",
+      "enabled": true,
+      "disabledReason": null,
+      "systems": [
+        {
+          "image": "oxygenos16-cph2745",
+          "label": "OxygenOS 16, OnePlus CPH2745 build",
+          "set": "oxygen16",
+          "tested": false
+        }
+      ]
     }
   ]
 }
