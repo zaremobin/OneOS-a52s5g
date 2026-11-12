@@ -30,6 +30,12 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # Accept all licenses up-front; the runner's preinstalled sdkmanager
+          # otherwise stalls on the preview license prompt (build.yml#2).
+          accept-android-sdk-licenses: true
+          packages: 'platform-tools platforms;android-37 build-tools;37.0.0'
+          cmdline-tools-version: 13114758
 
       - name: Build the guest manager (debug) and stage it
         working-directory: app-android
