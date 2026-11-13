@@ -245,6 +245,7 @@ profile_info() {
         s-8550-jp) echo "SCG19 SCG19 SM8550 bar" ;;
         m35) echo "SM-M356 m35x s5e8835 bar" ;;
         a15-5g) echo "SM-A156 a15x MT6835 bar" ;;
+        a52sxq) echo "SM-A528 a52sxq SM7325 bar" ;;
         *) return 1 ;;
     esac
 }
@@ -504,6 +505,7 @@ profile_set() {
         "m35 oxygenos16-cph2745") echo oxygen16 ;;
         "m35 hyperos-lhasa") echo hyper-f8u ;;
         "a15-5g oxygenos16-cph2745") echo oxygen16 ;;
+        "a52sxq oxygenos16-cph2745") echo oxygen16 ;;
         *) return 1 ;;
     esac
 }
